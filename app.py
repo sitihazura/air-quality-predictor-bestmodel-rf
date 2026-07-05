@@ -58,7 +58,7 @@ st.divider()
 # Input form
 # ------------------------------------------------------------
 st.subheader("🌤️ Tell Us About Your Surroundings")
-st.caption("Don't know the exact numbers? No problem — every field below already starts at a typical value, so you can just adjust what you know and leave the rest as is.")
+st.caption("Don't know the exact numbers? No problem! Every field below already starts at a default value, so you can just adjust what you know and leave the rest as is.")
 
 form_col, map_col = st.columns([1.2, 1])
 
