@@ -160,9 +160,9 @@ if st.button("Predict Air Quality", type="primary", use_container_width=True):
     st.subheader("Prediction Result")
 
     if predicted_label == "Safe":
-        st.success("✅ Predicted Air Quality: **Safe**")
+        st.success("✅ **Safe**")
     else:
-        st.error("⚠️ Predicted Air Quality: **Unsafe**")
+        st.error("⚠️ **Unsafe**")
 
     res_col1, res_col2 = st.columns(2)
     with res_col1:
