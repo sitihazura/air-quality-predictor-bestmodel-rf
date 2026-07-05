@@ -52,23 +52,13 @@ MONTH_NAMES = [
 # Header
 # ------------------------------------------------------------
 st.title("🌍 Air Quality Predictor")
-st.markdown(
-    "Predict whether air quality is **Safe** or **Unsafe** based on pollutant "
-    "concentrations and weather conditions, using a trained Random Forest model."
-)
-with st.expander("Why Random Forest?"):
-    st.markdown(
-        "Random Forest was selected after comparing it against XGBoost and Decision "
-        "Tree on the held-out test set. It achieved the highest or equal-highest score "
-        "across every metric: Accuracy (0.9986), Precision (0.9986), Recall (1.0000), "
-        "F1-Score (0.9993), and ROC-AUC (1.0000)."
-    )
 st.divider()
 
 # ------------------------------------------------------------
 # Input form
 # ------------------------------------------------------------
-st.subheader("Input Conditions")
+st.subheader("🌤️ Tell Us About Your Surroundings")
+st.caption("Don't know the exact numbers? No problem — every field below already starts at a typical value, so you can just adjust what you know and leave the rest as is.")
 
 form_col, map_col = st.columns([1.2, 1])
 
@@ -179,10 +169,3 @@ if st.button("Predict Air Quality", type="primary", use_container_width=True):
         st.metric("Probability: Unsafe", f"{prob_unsafe * 100:.1f}%")
 
     st.progress(float(prob_unsafe))
-    st.caption("Progress bar shows the model's confidence toward 'Unsafe'.")
-
-    with st.expander("View input sent to the model"):
-        st.dataframe(input_df)
-
-st.divider()
-st.caption("Model: Random Forest Classifier · Deployment stage demo")
