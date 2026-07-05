@@ -58,7 +58,7 @@ st.divider()
 # Input form
 # ------------------------------------------------------------
 st.subheader("🌤️ Tell Us About Your Surroundings")
-st.caption("Don't know the exact numbers? No problem! Every field below already starts at a default value, so you can just adjust what you know and leave the rest as is.")
+st.caption("Don't know the exact numbers? No problem — every field below already starts at a typical value, so you can just adjust what you know and leave the rest as is.")
 
 form_col, map_col = st.columns([1.2, 1])
 
@@ -160,14 +160,38 @@ if st.button("Predict Air Quality", type="primary", use_container_width=True):
     st.subheader("Prediction Result")
 
     if predicted_label == "Safe":
-        st.success("✅ **Safe**")
+        st.markdown(
+            "<div style='text-align:center; background-color:#e6f4ea; "
+            "padding:24px; border-radius:12px;'>"
+            "<span style='font-size:64px;'>✅</span><br>"
+            "<span style='font-size:40px; font-weight:700; color:#1a7f37;'>Safe</span>"
+            "</div>",
+            unsafe_allow_html=True
+        )
     else:
-        st.error("⚠️ **Unsafe**")
+        st.markdown(
+            "<div style='text-align:center; background-color:#fdecea; "
+            "padding:24px; border-radius:12px;'>"
+            "<span style='font-size:64px;'>⚠️</span><br>"
+            "<span style='font-size:40px; font-weight:700; color:#c0392b;'>Unsafe</span>"
+            "</div>",
+            unsafe_allow_html=True
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
 
     res_col1, res_col2 = st.columns(2)
     with res_col1:
-        st.metric("Probability: Safe", f"{prob_safe * 100:.1f}%")
+        st.markdown(
+            f"<span style='font-size:13px; color:gray;'>Probability: Safe</span><br>"
+            f"<span style='font-size:16px; font-weight:600;'>{prob_safe * 100:.1f}%</span>",
+            unsafe_allow_html=True
+        )
     with res_col2:
-        st.metric("Probability: Unsafe", f"{prob_unsafe * 100:.1f}%")
+        st.markdown(
+            f"<span style='font-size:13px; color:gray;'>Probability: Unsafe</span><br>"
+            f"<span style='font-size:16px; font-weight:600;'>{prob_unsafe * 100:.1f}%</span>",
+            unsafe_allow_html=True
+        )
 
     st.progress(float(prob_unsafe))
