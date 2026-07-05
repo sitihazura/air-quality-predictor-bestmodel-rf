@@ -58,7 +58,7 @@ st.divider()
 # Input form
 # ------------------------------------------------------------
 st.subheader("🌤️ Tell Us About Your Surroundings")
-st.caption("Don't know the exact numbers? No problem! Every field below already starts at a typical value, so you can just adjust what you know and leave the rest as is.")
+st.caption("Don't know the exact numbers? No problem — every field below already starts at a typical value, so you can just adjust what you know and leave the rest as is.")
 
 form_col, map_col = st.columns([1.2, 1])
 
@@ -91,9 +91,6 @@ with map_col:
             height=220,
         )
     st.caption(f"📍 {city}, {country}")
-
-st.markdown("**Air Quality Index**")
-aqi = st.slider("AQI", min_value=30, max_value=300, value=165)
 
 st.markdown("**Pollutant Levels**")
 p1, p2, p3 = st.columns(3)
@@ -128,10 +125,15 @@ if st.button("Predict Air Quality", type="primary", use_container_width=True):
     country_encoded = le_country.transform([country])[0]
 
     # Assemble all possible feature values, then select + order using feature_columns
+    # AQI is intentionally not asked from the user: it contributes under 1% to the
+    # model's decision, and varying it across its full range (30-300) never changes
+    # the predicted label in testing. A fixed typical value is used instead.
+    AQI_DEFAULT = 165
+
     input_values = {
         "City": city_encoded,
         "Country": country_encoded,
-        "AQI": aqi,
+        "AQI": AQI_DEFAULT,
         "PM25": pm25,
         "PM10": pm10,
         "NO2": no2,
